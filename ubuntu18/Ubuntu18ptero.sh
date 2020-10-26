@@ -82,7 +82,6 @@ apt install -y docker.io nodejs npm mariadb-common mariadb-server mariadb-client
 
 
 
-curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 systemctl start redis-server
 systemctl enable redis-server
@@ -119,7 +118,11 @@ curl -Lo panel.tar.gz https://github.com/pterodactyl/panel/releases/download/v0.
 tar --strip-components=1 -xzvf panel.tar.gz
 chmod -R 755 storage/* bootstrap/cache/
 cp .env.example .env
-composer install --no-dev --optimize-autoloader
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('sha384', 'composer-setup.php') === 'c31c1e292ad7be5f49291169c0ac8f683499edddcfd4e42232982d0fd193004208a58ff6f353fde0012d35fdd72bc394') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php --version=1.10.16
+
+php composer.phar install --no-dev --optimize-autoloader
 echo "50%"
 sleep 3
 php artisan key:generate --force
