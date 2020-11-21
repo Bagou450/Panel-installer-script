@@ -65,7 +65,7 @@ sleep 3
 
 apt update && apt -y upgrade
 
-apt install -y software-properties-common dirmngr ca-certificates apt-transport-https apt-transport-https ca-certificates curl gnupg2 software-properties-common zip unzip tar make gcc g++ python python-dev curl gnupg sudo 
+apt install -y zip unzip tar make gcc g++ python python-dev curl gnupg apt-transport-https ca-certificates curl gnupg2 software-properties-common
 curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
 curl -sL https://deb.nodesource.com/setup_12.x | bash -
